@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CareBase — AI-powered healthcare appointment management. Book doctor appointments online with our private medical clinic.">
+    <title>CareBase — Healthcare Appointment System</title>
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <div class="tb-inner">
+            <span>CareBase — Private Medical Clinic</span>
+            <div class="tb-right">
+                <span class="tb-live-dot" id="status-indicator">System Online</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">
+                <img src="/static/img/favicon.ico" alt="CareBase" class="nav-logo-icon">
+                <span class="nav-logo-text">Care<span>Base</span></span>
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#doctors">Doctors</a></li>
+                <li><a href="#book">Book Appointment</a></li>
+                <li><a href="#appointments">My Appointments</a></li>
+            </ul>
+            <div class="nav-actions" style="display: flex; align-items: center; gap: 12px;">
+                <div id="auth-buttons">
+                    <button class="btn-glass nav-btn" style="padding: 8px 16px !important;" onclick="openAuthModal()">Login / Sign Up</button>
+                </div>
+                <div id="user-menu" style="display: none; align-items: center; gap: 12px;">
+                    <span id="nav-user-name" style="font-size: 14px; font-weight: 600; color: var(--primary-dark);"></span>
+                    <button class="btn-danger nav-btn" style="padding: 8px 16px !important;" onclick="logout()">Logout</button>
+                </div>
+                <a href="#book" class="btn-primary nav-btn">Make an appointment</a>
+            </div>
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-inner">
+                <div>
+                    <div class="hero-eyebrow reveal">Private Medical Clinic</div>
+                    <h1 class="hero-title reveal">Your private clinic with <em>AI-powered care</em> and zero fees.</h1>
+                    <p class="hero-sub reveal">
+                        <strong>AI-powered healthcare management</strong> for seamless appointments, diagnostics, and patient care.
+                    </p>
+                    <div class="hero-btns reveal">
+                        <a href="#book" class="btn-primary">Make an appointment</a>
+                        <a href="#about" class="btn-glass">About us</a>
+                    </div>
+                </div>
+                <div class="hero-collage">
+                    <div class="hc-item wide"><img src="/static/img/doc4.jpg" alt="Senior Doctor"><span class="hc-badge">&#128172; Expert Care</span></div>
+                    <div class="hc-item"><img src="/static/img/doc3.webp" alt="Specialist"><span class="hc-badge">&#11088; Specialists</span></div>
+                    <div class="hc-item"><img src="/static/img/doc2.webp" alt="Telehealth"><span class="hc-badge">&#128187; Telehealth</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-strip">
+        <div class="container">
+            <div class="stats-inner">
+                <div class="stat-item reveal"><div class="stat-num" data-target="2400" data-suffix="+">0</div><div class="stat-label">Appointments</div></div>
+                <div class="stat-item reveal"><div class="stat-num" data-target="18">0</div><div class="stat-label">Specialists</div></div>
+                <div class="stat-item reveal"><div class="stat-num" data-target="4.9" data-float="1" data-suffix="&#11088;">0</div><div class="stat-label">Satisfaction</div></div>
+                <div class="stat-item reveal"><div class="stat-num" style="color:var(--primary);" data-target="100" data-suffix="%">0</div><div class="stat-label">AI Diagnostics</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT / WHY CHOOSE US -->
+    <section class="why-section" id="about">
+        <div class="container">
+            <div class="why-grid">
+                <div class="why-text">
+                    <span class="section-tag reveal">About us</span>
+                    <h2 class="section-title reveal">Why choose our clinic?</h2>
+                    <p class="reveal"><strong>At CareBase, we are deeply committed to providing you with personalized, high-quality care, delivered by a close-knit team.</strong></p>
+                    <p class="reveal"><strong>Reception Staff:</strong> From the moment you arrive, our receptionist welcomes you and guides you with care.</p>
+                    <p class="reveal"><strong>Nursing Support:</strong> Our nurse supports you with compassion throughout your medical journey.</p>
+                    <p class="reveal"><strong>Medical Care:</strong> The physician listens attentively and tailors treatments to your specific needs.</p>
+                    <p class="tagline reveal">A relationship built on trust — that's what makes all the difference.</p>
+                </div>
+                <div class="why-images reveal">
+                    <div class="why-img"><img src="/static/img/doc1.webp" alt="Doctor"></div>
+                    <div class="why-img"><img src="/static/img/doc5.webp" alt="Doctor"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="services-header">
+                <span class="section-tag reveal">Our services</span>
+                <h2 class="section-title reveal">Take charge of your health today.</h2>
+                <p class="section-subtitle reveal">Opting for private medical consultations ensures quick access, in-depth appointments and personalized care.</p>
+            </div>
+            <div class="svc-grid">
+                <div class="svc-card reveal">
+                    <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+                    <h3>Health check-up</h3><p>Comprehensive health screening and preventive care assessments tailored to your needs.</p>
+                </div>
+                <div class="svc-card reveal">
+                    <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg></div>
+                    <h3>General Consultation</h3><p>Same-day appointments for acute illnesses, chronic disease management, and more.</p>
+                </div>
+                <div class="svc-card reveal">
+                    <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7v2H8v2h8v-2h-2v-2h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z"/></svg></div>
+                    <h3>Telehealth Services</h3><p>Consult with our doctors remotely from the comfort of your home.</p>
+                </div>
+                <div class="svc-card reveal">
+                    <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg></div>
+                    <h3>Business Services</h3><p>Workplace health checkups, pre-employment medicals, and wellness programs.</p>
+                </div>
+                <div class="svc-card reveal">
+                    <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 2c-4.97 0-9 4.03-9 9 0 4.17 2.84 7.67 6.69 8.69L12 22l2.31-2.31C18.16 18.67 21 15.17 21 11c0-4.97-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/></svg></div>
+                    <h3>Mental Health</h3><p>Professional consultations for stress, anxiety, depression, and mental wellness.</p>
+                </div>
+                <div class="svc-card reveal">
+                    <div class="svc-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></div>
+                    <h3>AI Diagnostics</h3><p>Our AI analyzes symptoms and matches you with the right specialist instantly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOCTORS -->
+    <section class="doctors-section" id="doctors">
+        <div class="container">
+            <span class="section-tag reveal">Our Team</span>
+            <h2 class="section-title reveal">Meet Our Specialists</h2>
+            <div class="docs-row" id="doctors-grid">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="testi-header">
+                <span class="section-tag reveal">Testimonials</span>
+                <h2 class="section-title reveal">Client experiences</h2>
+            </div>
+            <div class="testi-grid">
+                <div class="testi-card reveal">
+                    <div class="tc-stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+                    <p class="tc-text">"Very good service... attentive and professional team... appointments respected."</p>
+                    <div class="tc-author"><strong>Diane St-Germain</strong><span>Patient</span></div>
+                </div>
+                <div class="testi-card reveal">
+                    <div class="tc-stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+                    <p class="tc-text">"I am really satisfied with the service. A friend referred me and I am very grateful!"</p>
+                    <div class="tc-author"><strong>Ahmed Islam</strong><span>Patient</span></div>
+                </div>
+                <div class="testi-card reveal">
+                    <div class="tc-stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+                    <p class="tc-text">"The AI diagnosis matched me with exactly the right specialist. Highly recommend."</p>
+                    <div class="tc-author"><strong>Sara Amjad</strong><span>Patient</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING FORM -->
+    <section class="booking-section" id="book">
+        <div class="container">
+            <div class="services-header">
+                <span class="section-tag reveal">Get Started</span>
+                <h2 class="section-title reveal">Book an Appointment</h2>
+                <p class="section-subtitle reveal">Fill in the form below to schedule your visit with one of our specialists.</p>
+            </div>
+            <div class="booking-wrapper">
+                <form class="booking-form" id="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="patient_name">Full Name</label>
+                            <input type="text" id="patient_name" name="patient_name" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="doctor_id">Select Doctor <span style="font-weight:400;color:var(--text-dim);font-size:12px;">(optional — AI will choose if left blank)</span></label>
+                            <select id="doctor_id" name="doctor_id">
+                                <option value="">Let AI recommend a doctor...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">📅 Appointment Date</label>
+                            <input type="date" id="date" name="date" required style="padding:14px 16px; font-size:15px; color:var(--heading-blue);">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">🕐 Preferred Time</label>
+                            <select id="time" name="time" required style="padding:14px 16px; font-size:15px; color:var(--heading-blue);">
+                                <option value="">Select a date first...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="symptoms">Describe Your Symptoms</label>
+                        <textarea id="symptoms" name="symptoms" rows="4" placeholder="Please describe your symptoms or reason for visit..." required></textarea>
+                        <button type="button" class="btn-glass ai-recommend-btn" id="ai-recommend-btn" onclick="aiRecommend()">
+                            &#129302; AI Recommend Doctor
+                        </button>
+                    </div>
+                    <div class="ai-results" id="ai-results" style="display:none;">
+                        <h4>&#129302; AI Symptom Analysis</h4>
+                        <div class="ai-result-grid">
+                            <div class="ai-result-item">
+                                <span class="ai-label">Matched Specialty</span>
+                                <span class="ai-value" id="ai-specialty"></span>
+                            </div>
+                            <div class="ai-result-item">
+                                <span class="ai-label">Recommended Doctor</span>
+                                <span class="ai-value" id="ai-doctor"></span>
+                            </div>
+                        </div>
+                        <div class="ai-result-item full">
+                            <span class="ai-label">Predicted Conditions</span>
+                            <ul id="ai-conditions"></ul>
+                        </div>
+                        <div class="ai-result-item full">
+                            <span class="ai-label">Precautions</span>
+                            <ul id="ai-precautions"></ul>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary btn-full" id="submit-btn">
+                        <span class="btn-text">Book Appointment</span>
+                        <span class="btn-loader" style="display:none;">Booking...</span>
+                    </button>
+                </form>
+                <div class="form-message" id="form-message" style="display:none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPOINTMENTS LIST -->
+    <section class="appointments-section" id="appointments">
+        <div class="container">
+            <div class="services-header">
+                <span class="section-tag reveal">Your Schedule</span>
+                <h2 class="section-title reveal">Booked Appointments</h2>
+                <p class="section-subtitle reveal">View and manage your upcoming appointments</p>
+            </div>
+            <div class="appointments-list" id="appointments-list">
+                <div class="empty-state" id="empty-state">
+                    <div class="empty-icon">&#128197;</div>
+                    <h3>No appointments yet</h3>
+                    <p>Book your first appointment using the form above</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box reveal">
+                <svg class="cta-icon" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <h2>Innovative personalized care awaits you</h2>
+                <p>Book your appointment today — our system will find the right specialist for you.</p>
+                <a href="#book" class="cta-btn">Book an appointment</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUTH MODAL -->
+    <div id="auth-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+            <h2 id="auth-title">Login</h2>
+            <form id="auth-form">
+                <div class="form-group" id="fg-fullname" style="display: none; margin-bottom: 12px;">
+                    <label>Full Name</label>
+                    <input type="text" id="auth_fullname" placeholder="John Doe">
+                </div>
+                <div class="form-group" style="margin-bottom: 12px;">
+                    <label>Username</label>
+                    <input type="text" id="auth_username" required placeholder="johndoe123">
+                </div>
+                <div class="form-group" id="fg-email" style="display: none; margin-bottom: 12px;">
+                    <label>Email</label>
+                    <input type="email" id="auth_email" placeholder="john@example.com">
+                </div>
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label>Password</label>
+                    <input type="password" id="auth_password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary btn-full" id="auth-submit-btn">Login</button>
+                <div class="form-message" id="auth-message" style="display:none; margin-top: 10px;"></div>
+                <p style="text-align: center; margin-top: 16px; font-size: 14px;">
+                    <span id="auth-toggle-text">Don't have an account?</span>
+                    <a href="#" onclick="toggleAuthMode(event)" style="color: var(--primary); font-weight: 600;">Sign up here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo-white">Care<span>Base</span></div>
+                    <p>Healthcare Appointment Management System. AI-powered private medical clinic.</p>
+                    <p style="margin-top: 8px; font-size: 0.85rem; opacity: 0.6;">SE202L DevOps Lab Project</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#doctors">Doctors</a></li>
+                        <li><a href="#book">Book Appointment</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>API Endpoints</h4>
+                    <p><a href="/health" target="_blank">GET /health</a></p>
+                    <p><a href="/api/doctors" target="_blank">GET /api/doctors</a></p>
+                    <p><a href="/api/appointments" target="_blank">GET /api/appointments</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CareBase. Built with Flask &amp; Docker.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        const API_BASE = "";
+        let currentUser = null;
+        let authMode = 'login'; // 'login' or 'register'
+
+        // ---- Auth Logic ----
+        async function checkAuth() {
+            try {
+                const res = await fetch(`${API_BASE}/api/auth/me`);
+                if (res.ok) {
+                    const data = await res.json();
+                    currentUser = data.user;
+                    document.getElementById('auth-buttons').style.display = 'none';
+                    document.getElementById('user-menu').style.display = 'flex';
+                    document.getElementById('nav-user-name').textContent = currentUser.full_name;
+                    
+                    const nameInput = document.getElementById('patient_name');
+                    nameInput.value = currentUser.full_name;
+                    nameInput.readOnly = true;
+                    
+                    loadAppointments();
+                } else {
+                    currentUser = null;
+                    document.getElementById('auth-buttons').style.display = 'block';
+                    document.getElementById('user-menu').style.display = 'none';
+                    document.getElementById('patient_name').value = '';
+                    document.getElementById('patient_name').readOnly = false;
+                    document.getElementById('appointments-list').innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-icon">&#128274;</div>
+                            <h3>Please login</h3>
+                            <p>You must be logged in to view your appointments</p>
+                        </div>`;
+                }
+            } catch (err) {
+                console.error("Auth check failed:", err);
+            }
+        }
+
+        function openAuthModal() {
+            document.getElementById('auth-modal').style.display = 'flex';
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').style.display = 'none';
+            document.getElementById('auth-form').reset();
+            document.getElementById('auth-message').style.display = 'none';
+        }
+
+        function toggleAuthMode(e) {
+            e.preventDefault();
+            authMode = authMode === 'login' ? 'register' : 'login';
+            document.getElementById('auth-title').textContent = authMode === 'login' ? 'Login' : 'Sign Up';
+            document.getElementById('auth-submit-btn').textContent = authMode === 'login' ? 'Login' : 'Sign Up';
+            document.getElementById('auth-toggle-text').textContent = authMode === 'login' ? "Don't have an account?" : "Already have an account?";
+            document.getElementById('fg-fullname').style.display = authMode === 'register' ? 'block' : 'none';
+            document.getElementById('fg-email').style.display = authMode === 'register' ? 'block' : 'none';
+            
+            if (authMode === 'register') {
+                document.getElementById('auth_fullname').required = true;
+                document.getElementById('auth_email').required = true;
+                e.target.textContent = 'Login here';
+            } else {
+                document.getElementById('auth_fullname').required = false;
+                document.getElementById('auth_email').required = false;
+                e.target.textContent = 'Sign up here';
+            }
+        }
+
+        document.getElementById('auth-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('auth-submit-btn');
+            const msg = document.getElementById('auth-message');
+            btn.disabled = true;
+            btn.textContent = 'Please wait...';
+            
+            const endpoint = authMode === 'login' ? '/api/auth/login' : '/api/auth/register';
+            const payload = {
+                username: document.getElementById('auth_username').value,
+                password: document.getElementById('auth_password').value
+            };
+            if (authMode === 'register') {
+                payload.full_name = document.getElementById('auth_fullname').value;
+                payload.email = document.getElementById('auth_email').value;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                    credentials: 'same-origin'
+                });
+                const data = await res.json();
+                
+                if (res.ok) {
+                    closeAuthModal();
+                    await checkAuth();
+                } else {
+                    msg.className = "form-message error";
+                    msg.textContent = data.error || "Authentication failed";
+                    msg.style.display = "block";
+                }
+            } catch (err) {
+                console.error("Auth error:", err);
+                msg.className = "form-message error";
+                msg.textContent = "Connection error: " + err.message;
+                msg.style.display = "block";
+            }
+            btn.disabled = false;
+            btn.textContent = authMode === 'login' ? 'Login' : 'Sign Up';
+        });
+
+        async function logout() {
+            await fetch(`${API_BASE}/api/auth/logout`, { method: 'POST' });
+            checkAuth();
+        }
+
+        // ---- Health Check ----
+        async function checkHealth() {
+            const indicator = document.getElementById("status-indicator");
+            try {
+                const res = await fetch(`${API_BASE}/health`);
+                const data = await res.json();
+                if (data.status === "ok") {
+                    indicator.textContent = "System Online";
+                    indicator.classList.add("online");
+                }
+            } catch {
+                indicator.textContent = "System Offline";
+                indicator.classList.add("offline");
+            }
+        }
+
+        // ---- Load Doctors ----
+        async function loadDoctors() {
+            try {
+                const res = await fetch(`${API_BASE}/api/doctors`);
+                const data = await res.json();
+                const grid = document.getElementById("doctors-grid");
+                const select = document.getElementById("doctor_id");
+
+                const doctorImages = {
+                    1: "/static/img/doc4.jpg",
+                    2: "/static/img/doc2.webp",
+                    3: "/static/img/doc3.webp",
+                    4: "/static/img/doc5.webp",
+                    5: "/static/img/doc1.webp"
+                };
+
+                data.doctors.forEach(doc => {
+                    const imgSrc = doctorImages[doc.id] || "/static/img/doc1.webp";
+
+                    const card = document.createElement("div");
+                    card.className = "doc-card reveal";
+                    card.innerHTML = `
+                        <div class="doc-photo"><img src="${imgSrc}" alt="${doc.name}"></div>
+                        <div class="doc-info">
+                            <strong>${doc.name}</strong>
+                            <span>${doc.specialty}</span>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+
+                    const option = document.createElement("option");
+                    option.value = doc.id;
+                    option.textContent = `${doc.name} — ${doc.specialty}`;
+                    select.appendChild(option);
+                });
+
+                // Trigger reveal for new cards
+                observeNewElements();
+            } catch (err) {
+                console.error("Failed to load doctors:", err);
+            }
+        }
+
+        // ---- Time Slots ----
+        async function fetchTimeSlots() {
+            const doctorId = document.getElementById("doctor_id").value;
+            const date = document.getElementById("date").value;
+            const timeSelect = document.getElementById("time");
+            
+            if (!date) {
+                timeSelect.innerHTML = '<option value="">Select a date first...</option>';
+                return;
+            }
+
+            try {
+                let url = `${API_BASE}/api/time-slots?date=${date}`;
+                if (doctorId) url += `&doctor_id=${doctorId}`;
+                const res = await fetch(url);
+                const data = await res.json();
+                
+                timeSelect.innerHTML = '<option value="">Choose a time slot...</option>';
+                if (data.slots.length === 0) {
+                    timeSelect.innerHTML = '<option value="">No slots available for this date</option>';
+                } else {
+                    data.slots.forEach(slot => {
+                        const opt = document.createElement("option");
+                        opt.value = slot;
+                        opt.textContent = slot;
+                        timeSelect.appendChild(opt);
+                    });
+                }
+            } catch (err) {
+                console.error("Failed to fetch time slots:", err);
+            }
+        }
+
+        document.getElementById("doctor_id").addEventListener("change", fetchTimeSlots);
+        document.getElementById("date").addEventListener("change", fetchTimeSlots);
+        document.getElementById("date").addEventListener("input", function() {
+            // Fire when user types or uses date picker; debounce slightly
+            clearTimeout(this._debounce);
+            this._debounce = setTimeout(fetchTimeSlots, 300);
+        });
+
+        // ---- Book Appointment ----
+        // Intercept click so auth check runs BEFORE HTML5 required-field validation
+        document.getElementById("submit-btn").addEventListener("click", (e) => {
+            if (!currentUser) {
+                e.preventDefault();
+                openAuthModal();
+                return;
+            }
+        });
+
+        document.getElementById("booking-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                openAuthModal();
+                return;
+            }
+
+            const btn = document.getElementById("submit-btn");
+            const msg = document.getElementById("form-message");
+            btn.querySelector(".btn-text").style.display = "none";
+            btn.querySelector(".btn-loader").style.display = "inline";
+            btn.disabled = true;
+
+            const doctorVal = document.getElementById("doctor_id").value;
+            const payload = {
+                date: document.getElementById("date").value,
+                time: document.getElementById("time").value,
+                symptoms: document.getElementById("symptoms").value
+            };
+            if (doctorVal) payload.doctor_id = parseInt(doctorVal);
+
+            try {
+                const res = await fetch(`${API_BASE}/api/appointments`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+
+                if (res.status === 201) {
+                    msg.className = "form-message success";
+                    msg.textContent = `Appointment booked successfully! ID: #${data.appointment.id}`;
+                    msg.style.display = "block";
+                    // Reset fields except name
+                    document.getElementById("doctor_id").value = "";
+                    document.getElementById("date").value = "";
+                    document.getElementById("time").innerHTML = '<option value="">Select a date first...</option>';
+                    document.getElementById("symptoms").value = "";
+                    document.getElementById("ai-results").style.display = "none";
+                    loadAppointments();
+                } else {
+                    msg.className = "form-message error";
+                    msg.textContent = data.error || "Something went wrong";
+                    msg.style.display = "block";
+                }
+            } catch (err) {
+                msg.className = "form-message error";
+                msg.textContent = "Network error. Please try again.";
+                msg.style.display = "block";
+            }
+
+            btn.querySelector(".btn-text").style.display = "inline";
+            btn.querySelector(".btn-loader").style.display = "none";
+            btn.disabled = false;
+            setTimeout(() => { msg.style.display = "none"; }, 5000);
+        });
+
+        // ---- Load Appointments ----
+        async function loadAppointments() {
+            try {
+                const res = await fetch(`${API_BASE}/api/appointments`);
+                const data = await res.json();
+                const list = document.getElementById("appointments-list");
+                const empty = document.getElementById("empty-state");
+
+                list.querySelectorAll(".appointment-card").forEach(c => c.remove());
+
+                if (data.appointments.length === 0) {
+                    empty.style.display = "flex";
+                    return;
+                }
+                empty.style.display = "none";
+
+                data.appointments.forEach(appt => {
+                    const card = document.createElement("div");
+                    card.className = "appointment-card";
+                    const ai = appt.ai_analysis || {};
+                    const conditionsHTML = ai.predicted_conditions ? ai.predicted_conditions.map(c => `<li>⚠️ ${c}</li>`).join('') : '';
+                    const precautionsHTML = ai.precautions ? ai.precautions.map(p => `<li>✅ ${p}</li>`).join('') : '';
+                    card.innerHTML = `
+                        <div class="appt-header">
+                            <span class="appt-id">#${appt.id}</span>
+                            <span class="appt-status status-${appt.status}">${appt.status}</span>
+                        </div>
+                        <div class="appt-body">
+                            <div class="appt-info">
+                                <h3>${appt.patient_name}</h3>
+                                <p><strong>👨‍⚕️ Doctor:</strong> ${appt.doctor_name} (${appt.specialty})</p>
+                                <p><strong>📅 Date:</strong> ${appt.date} &nbsp;&nbsp; <strong>🕐 Time:</strong> ${appt.time}</p>
+                                <p><strong>🩺 Symptoms:</strong> ${appt.symptoms}</p>
+                            </div>
+                            <button class="btn-danger" onclick="cancelAppointment(${appt.id})">Cancel</button>
+                        </div>
+                        ${ai.predicted_conditions ? `
+                        <div class="appt-ai-section">
+                            <h4>🤖 AI Diagnosis Report</h4>
+                            <div class="appt-ai-grid">
+                                <div class="appt-ai-col">
+                                    <span class="appt-ai-label">🔬 Predicted Conditions</span>
+                                    <ul class="appt-ai-list">${conditionsHTML}</ul>
+                                </div>
+                                <div class="appt-ai-col">
+                                    <span class="appt-ai-label">🛡️ Precautions</span>
+                                    <ul class="appt-ai-list">${precautionsHTML}</ul>
+                                </div>
+                            </div>
+                        </div>` : ''}
+                    `;
+                    list.appendChild(card);
+                });
+            } catch (err) {
+                console.error("Failed to load appointments:", err);
+            }
+        }
+
+        // ---- Cancel Appointment ----
+        async function cancelAppointment(id) {
+            if (!confirm("Are you sure you want to cancel this appointment?")) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/appointments/${id}`, { method: "DELETE" });
+                if (res.ok) loadAppointments();
+            } catch (err) {
+                console.error("Failed to cancel:", err);
+            }
+        }
+
+        // ---- Scroll Reveal ----
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+        function observeNewElements() {
+            document.querySelectorAll(".reveal:not(.visible)").forEach(el => revealObserver.observe(el));
+        }
+
+        // ---- Animated Counters ----
+        function animateCounter(el) {
+            const target = parseFloat(el.dataset.target);
+            const isFloat = el.dataset.float;
+            const suffix = el.dataset.suffix || "";
+            const duration = 2000;
+            const start = performance.now();
+            function step(now) {
+                const p = Math.min((now - start) / duration, 1);
+                const ease = 1 - Math.pow(1 - p, 4);
+                const val = target * ease;
+                el.textContent = (isFloat ? val.toFixed(1) : Math.floor(val).toLocaleString()) + suffix;
+                if (p < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        }
+        const counterObs = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting && !e.target.dataset.done) {
+                    e.target.dataset.done = "1";
+                    animateCounter(e.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll("[data-target]").forEach(el => counterObs.observe(el));
+
+        // ---- Navbar Scroll Effect ----
+        window.addEventListener("scroll", () => {
+            document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 50);
+        });
+
+        // ---- Mobile Menu ----
+        document.getElementById("hamburgerBtn").addEventListener("click", () => {
+            document.getElementById("nav-links").classList.toggle("active");
+        });
+
+        // ---- Smooth scroll ----
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener("click", function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute("href"));
+                if (target) {
+                    target.scrollIntoView({ behavior: "smooth", block: "start" });
+                    document.getElementById("nav-links").classList.remove("active");
+                }
+            });
+        });
+
+        // ---- Set min date ----
+        document.getElementById("date").min = new Date().toISOString().split("T")[0];
+
+        // ---- AI Recommend ----
+        async function aiRecommend() {
+            const symptoms = document.getElementById("symptoms").value.trim();
+            if (!symptoms) { alert("Please describe your symptoms first."); return; }
+            const btn = document.getElementById("ai-recommend-btn");
+            btn.textContent = "Analyzing...";
+            btn.disabled = true;
+            try {
+                const res = await fetch(`${API_BASE}/api/analyze`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ symptoms })
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    document.getElementById("ai-specialty").textContent = data.specialty;
+                    document.getElementById("ai-doctor").textContent = data.recommended_doctor.name;
+                    const condList = document.getElementById("ai-conditions");
+                    condList.innerHTML = data.predicted_conditions.map(c => `<li>${c}</li>`).join("");
+                    const precList = document.getElementById("ai-precautions");
+                    precList.innerHTML = data.precautions.map(p => `<li>${p}</li>`).join("");
+                    document.getElementById("ai-results").style.display = "block";
+                    // Auto-select the recommended doctor
+                    const select = document.getElementById("doctor_id");
+                    select.value = data.recommended_doctor.id;
+                    fetchTimeSlots();
+                }
+            } catch (err) { console.error("AI analysis failed:", err); }
+            btn.innerHTML = "&#129302; AI Recommend Doctor";
+            btn.disabled = false;
+        }
+
+        // ---- Init ----
+        checkHealth();
+        checkAuth();
+        loadDoctors();
+    </script>
+</body>
+</html>
